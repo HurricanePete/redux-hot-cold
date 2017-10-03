@@ -11,7 +11,7 @@ const initialState = {
     showInfoModal: false
 };
 
-export default (state, action) => {
+export const hotColdReducer = (state, action) => {
     state = state || initialState;
     if (action.type === NEW_GAME) {
         state = Object.assign({
