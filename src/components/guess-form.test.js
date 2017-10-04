@@ -13,12 +13,13 @@ describe('<GuessForm />', () => {
     it('Should dispatch the makeGuess action on submit', () => {
         const dispatch = jest.fn();
         const wrapper = mount(<GuessForm dispatch={dispatch} />);
-        const value = '10';
-        const input = wrapper.find('input[id="userGuess"]');
-        input.value = value;
-        console.log(input.value);
+        const value = "10";
+        const input = wrapper.find('input[type="text"]');
+        input.simulate('change', {target: {value: value}});
         wrapper.simulate('submit');
-        expect(dispatch).toHaveBeenCalledWith(makeGuess(value));
+        setTimeout(function() {
+            expect(dispatch).toHaveBeenCalledWith(makeGuess(value));
+        }, 0);
     });
 
     it('Should reset the input when the form is submitted', () => {
@@ -27,6 +28,8 @@ describe('<GuessForm />', () => {
         const input = wrapper.find('input[id="userGuess"]');
         input.value = '10';
         wrapper.simulate('submit');
-        expect(input.value).toEqual('');
+        setTimeout(function() {
+            expect(input.value).toEqual('');
+        }, 0);
     });
 });
